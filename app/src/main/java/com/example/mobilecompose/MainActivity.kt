@@ -34,13 +34,18 @@ import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.example.mobilecompose.ui.theme.MobileComposeTheme
 
+// Single entry-point activity; hosts the entire Compose UI tree.
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Must be called before super.onCreate to properly animate the splash screen exit.
         installSplashScreen()
+        // Renders content behind system bars for a full-bleed, edge-to-edge look.
         enableEdgeToEdge()
         setContent {
             MobileComposeTheme {
+                // Scaffold manages insets; innerPadding prevents content from sitting
+                // under the status/navigation bars.
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         modifier = Modifier.padding(innerPadding)
@@ -50,9 +55,17 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+/**
+ * Main screen composable — a card-style form that greets the user by name.
+ *
+ * State is kept local here because it doesn't need to be shared with other screens.
+ * If this grows, consider hoisting [inputName] and [welcomeMessage] to a ViewModel.
+ */
 @Composable
 fun Greeting(modifier: Modifier = Modifier) {
+    // Holds the live value of the text field.
     var inputName by remember { mutableStateOf("") }
+    // Holds the result message shown after submission.
     var welcomeMessage by remember { mutableStateOf("") }
 
     Surface(
@@ -64,6 +77,7 @@ fun Greeting(modifier: Modifier = Modifier) {
             contentAlignment = Alignment.Center,
             modifier = Modifier.fillMaxSize()
         ) {
+            // Elevated card container for the form content.
             Surface(
                 shape = RoundedCornerShape(16.dp),
                 shadowElevation = 8.dp,
@@ -91,6 +105,7 @@ fun Greeting(modifier: Modifier = Modifier) {
                     ) {
                         Button(
                             onClick = {
+                                // Show an error hint when the field is blank.
                                 welcomeMessage = if (inputName.isNotEmpty()) {
                                     "Welcome $inputName!"
                                 } else {
@@ -106,6 +121,7 @@ fun Greeting(modifier: Modifier = Modifier) {
 
                         Button(
                             onClick = {
+                                // Reset both state values to their initial empty state.
                                 welcomeMessage = ""
                                 inputName = ""
                             },
@@ -117,7 +133,7 @@ fun Greeting(modifier: Modifier = Modifier) {
                         }
                     }
 
-                    // Welcome message display
+                    // Welcome message display — only rendered when there is a message to show.
                     if (welcomeMessage.isNotEmpty()) {
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
@@ -132,6 +148,7 @@ fun Greeting(modifier: Modifier = Modifier) {
     }
 }
 
+// Design-time preview — visible in Android Studio's Preview pane without a running device.
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
