@@ -1,7 +1,10 @@
 package com.example.mobilecompose.ui.theme
 
+import androidx.compose.ui.graphics.Color
+
 // Brand color palette — suffix "80" = lighter (dark theme), "40" = darker (light theme).
-// These follow Material Design 3 tonal palette conventions.= Color(0xFFD0BCFF)
+// These follow Material Design 3 tonal palette conventions.
+val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)
 
