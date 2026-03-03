@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Theme.MySplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splashcolor</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/josemiles</item>
+        <item name="postSplashScreenTheme">@style/Theme.MobileCompose</item>
+    </style>
     <style name="Theme.MobileCompose" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>
