@@ -33,6 +33,14 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+/**
+ * App-wide Material3 theme.
+ *
+ * Priority order for color scheme selection:
+ *   1. Dynamic color (Android 12+ / API 31+) — wallpaper-extracted colors.
+ *   2. Static dark scheme  — used on older devices in dark mode.
+ *   3. Static light scheme — default fallback.
+ */
 @Composable
 fun MobileComposeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
