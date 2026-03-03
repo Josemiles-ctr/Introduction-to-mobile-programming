@@ -38,7 +38,7 @@ import com.example.mobilecompose.ui.theme.MobileComposeTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Must be called before super.onCreate to properly animate the splash screen exit.
+        // Install splash screen to animate the splash screen exit.
         installSplashScreen()
         // Renders content behind system bars for a full-bleed, edge-to-edge look.
         enableEdgeToEdge()
